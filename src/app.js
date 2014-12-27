@@ -50,12 +50,19 @@ var sepLine = new UI.Rect({
 
 //Address elements
 var detailsAddr = new UI.Text({
-  position: new Vector2(10, 95),
-  size: new Vector2(124, 30),
+  position: new Vector2(10, 55),
+  size: new Vector2(134, 80),
   text: "",
-  font: 'gothic-14',
+  font: 'gothic-18',
   color: 'white',
   textAlign: 'left'
+});
+
+//Logo
+var logo = new UI.Image({
+  position: new Vector2(44, 100),
+  size: new Vector2(40, 40),
+  image: 'images/bike40invert.png'
 });
 
 // Add the elements
@@ -63,14 +70,14 @@ main.add(bgRect);
 main.add(title);
 main.add(desc);
 main.add(sepLine);
-main.add(detailsAddr);
+main.add(logo);
 
 main.show();
 
 //Select click handler
 main.on('click', 'select', function(e) {
 	//Loading
-	detailsAddr.text("Loading...");
+	desc.text("Loading...");
 	
 	//Geolocation + API Call
 	window.navigator.geolocation.getCurrentPosition(function(position){
@@ -82,11 +89,18 @@ main.on('click', 'select', function(e) {
 		var call = url + gps + "&limit=1&distance=1";
 		ajax({url: call, type: 'json'},function(json) {				
 			var res= json[0];
-			//titleAddr.text(res.name);
-			detailsAddr.text(res.address);
-			//Todo: get occupancy info
+			
+			//UI cleaning
+			desc.remove();
+			sepLine.remove();
+			logo.remove();
+			
+			//Display details
+			main.add(detailsAddr);
+			detailsAddr.text(res.address + "\n\n" + "bikes: " + res.available_bikes + " | spots: " + res.available_bike_stands);			
 		},
 		function(error) {
+			desc.text("Error...");
 			console.log('Ajax failed: ' + error);
 		});
 		

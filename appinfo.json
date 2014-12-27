@@ -1,7 +1,7 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "location"
     ],
     "companyName": "alexis.kovalenko@gmail.com",
     "longName": "Pebble Velib",
@@ -10,7 +10,6 @@
         "media": [
             {
                 "file": "images/menu_icon.png",
-                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
                 "type": "png"
             },
@@ -28,6 +27,17 @@
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
+            },
+            {
+                "file": "images/bike40invert.png",
+                "name": "IMAGES_BIKE40INVERT_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/bike.png",
+                "menuIcon": true,
+                "name": "IMAGES_BIKE_PNG",
+                "type": "png"
             }
         ]
     },
